@@ -43,7 +43,7 @@ def obtener_datos_iracing(email, password):
 
 # Ejemplo de uso
 if __name__ == "__main__":
-    email = 'xxxxxxxxxx'
-    password = 'xxxxxxxxxxxxxx'
+    email = 'INSERTMAIL'
+    password = 'INSERTPASS'
     nombre, irating = obtener_datos_iracing(email, password)
     print(f'Nombre: {nombre}, iRating: {irating}')
