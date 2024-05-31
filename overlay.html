@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overlay iRacing</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: white;
+            background-color: rgba(0, 0, 0, 0);
+        }
+        .overlay {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <div id="nombre"></div>
+        <div id="irating"></div>
+    </div>
+    <script>
+        function actualizarDatos() {
+            fetch('http://localhost:8000/datos.json')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('nombre').textContent = `Nombre: ${data.nombre}`;
+                    document.getElementById('irating').textContent = `iRating: ${data.irating}`;
+                })
+                .catch(error => console.error('Error al obtener los datos:', error));
+        }
+
+        actualizarDatos();
+        setInterval(actualizarDatos, 60000); // Actualiza cada minuto
+    </script>
+</body>
+</html>
