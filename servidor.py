@@ -10,8 +10,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         if self.path == '/datos.json':
             try:
                 # Llama a la función para obtener los datos
-                email = 'xxxxxxx'
-                password = 'xxxxxxx'
+                email = 'INSERTEMAIL'
+                password = 'INSERTPASS'
                 nombre, irating = obtener_datos_iracing(email, password)
                 
                 # Crea el JSON con los datos
