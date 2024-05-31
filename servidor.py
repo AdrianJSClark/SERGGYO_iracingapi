@@ -2,6 +2,9 @@ import http.server
 import socketserver
 import json
 from obtener_datos_iracing import obtener_datos_iracing
+# Importar credenciales
+from credenciales import email, password
+
 
 PORT = 8000
 
@@ -10,8 +13,9 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         if self.path == '/datos.json':
             try:
                 # Llama a la función para obtener los datos
-                email = 'INSERTEMAIL'
-                password = 'INSERTPASS'
+                # Importar credenciales
+                from credenciales import email, password
+
                 nombre, irating = obtener_datos_iracing(email, password)
                 
                 # Crea el JSON con los datos
