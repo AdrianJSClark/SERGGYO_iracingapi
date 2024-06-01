@@ -67,7 +67,7 @@ def obtener_datos_iracing(email, password):
         # Realizar una solicitud a la URL del link
         data_url = link_result['link']
         
-        response = session.get(data_url, headers=headers, cookies=cookies)
+        response = requests.get(data_url)
         response.raise_for_status()
 
         result = response.json()
@@ -76,11 +76,11 @@ def obtener_datos_iracing(email, password):
         guardar_json_local(result)
 
         # Asegurarse de que 'name' e 'irating' existan en result
-        if 'name' not in result or 'irating' not in result:
+        if 'display_name' not in result or 'licenses' not in result:
             raise ValueError("La respuesta JSON no contiene las claves 'name' e 'irating' necesarias")
 
-        nombre = result['name']
-        irating = result['irating']
+        nombre = result["display_name"]
+        irating = result["licenses"]["formula_car"]["irating"]
 
         return nombre, irating
     
@@ -99,8 +99,8 @@ def procesar_datos_locales(filename='datos_iracing.json'):
         data = leer_json_local(filename)
         if not data:
             return None, None
-        nombre = data.get('name')
-        irating = data.get('irating')
+        nombre = data["display_name"]
+        irating = data["licenses"]["formula_car"]["irating"]
 
         if not nombre or not irating:
             raise ValueError("Los datos locales no contienen las claves 'name' o 'irating' necesarias")
